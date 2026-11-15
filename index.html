@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gala de Graduación - Promoción ELITE 2026 | Colegio Honores</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        royal: {
+                            950: '#020813',
+                            900: '#04132a',
+                            800: '#081f42',
+                            700: '#0e2d5c'
+                        },
+                        gold: {
+                            100: '#fbf5d4',
+                            200: '#f3e5ab',
+                            300: '#e6c86e',
+                            400: '#d4af37',
+                            500: '#b59428',
+                            600: '#8a6d14'
+                        }
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        decorative: ['Cinzel Decorative', 'serif'],
+                        playfair: ['Playfair Display', 'serif'],
+                        montserrat: ['Montserrat', 'sans-serif'],
+                        cursive: ['Great Vibes', 'cursive']
+                    },
+                    animation: {
+                        'float': 'float 5s ease-in-out infinite',
+                        'shimmer': 'shimmer 4s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% center' },
+                            '100%': { backgroundPosition: '200% center' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;600;700;800;900&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons & Confetti -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        body {
+            background-color: #020813;
+            color: #fbf5d4;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Textura sutil de lujo en el fondo */
+        .royal-pattern {
+            background-image: radial-gradient(rgba(212, 175, 55, 0.08) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+
+        /* Tarjeta Principal Estilo Gala */
+        .gala-card {
+            background: linear-gradient(160deg, rgba(6, 22, 48, 0.96) 0%, rgba(2, 8, 19, 0.99) 100%);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(212, 175, 55, 0.45);
+            box-shadow: 
+                0 35px 80px rgba(0, 0, 0, 0.95),
+                0 0 60px rgba(212, 175, 55, 0.12),
+                inset 0 0 40px rgba(4, 19, 42, 0.9);
+        }
+
+        /* Marco Ornamental Interior */
+        .ornate-border {
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            position: relative;
+        }
+        .ornate-border::before {
+            content: '';
+            position: absolute;
+            inset: 5px;
+            border: 1px dashed rgba(212, 175, 55, 0.25);
+            pointer-events: none;
+        }
+
+        /* Texto Pan de Oro Metálico */
+        .gold-foil-text {
+            background: linear-gradient(
+                135deg, 
+                #b59428 0%, 
+                #fbf5d4 22%, 
+                #d4af37 45%, 
+                #8a6d14 68%, 
+                #f3e5ab 88%, 
+                #d4af37 100%
+            );
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 4px 12px rgba(212, 175, 55, 0.25));
+            animation: shimmer 6s linear infinite;
+        }
+
+        /* Listón Dorado Estilo Emblema */
+        .gold-ribbon {
+            background: linear-gradient(90deg, #8a6d14 0%, #d4af37 25%, #f3e5ab 50%, #d4af37 75%, #8a6d14 100%);
+            color: #020813;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+            clip-path: polygon(0 0, 100% 0, 97% 50%, 100% 100%, 0 100%, 3% 50%);
+        }
+
+        /* Contenedores de Cristal */
+        .luxury-panel {
+            background: linear-gradient(145deg, rgba(8, 31, 66, 0.55) 0%, rgba(4, 19, 42, 0.75) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.28);
+            box-shadow: inset 0 1px 0 rgba(251, 245, 212, 0.12);
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .luxury-panel:hover {
+            border-color: rgba(212, 175, 55, 0.75);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(212, 175, 55, 0.18);
+        }
+
+        /* Botón Dorado Real */
+        .btn-gold {
+            background: linear-gradient(135deg, #d4af37 0%, #f3e5ab 50%, #b59428 100%);
+            background-size: 200% auto;
+            color: #020813;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 28px rgba(212, 175, 55, 0.35);
+        }
+
+        .btn-gold:hover {
+            background-position: right center;
+            box-shadow: 0 12px 38px rgba(243, 229, 171, 0.6);
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        /* Esquinas Decorativas SVG */
+        .corner-ornament {
+            position: absolute;
+            width: 38px;
+            height: 38px;
+            pointer-events: none;
+            color: #d4af37;
+            opacity: 0.85;
+        }
+
+        ::-webkit-scrollbar { width: 7px; }
+        ::-webkit-scrollbar-track { background: #020813; }
+        ::-webkit-scrollbar-thumb { background: #b59428; border-radius: 4px; }
+    </style>
+</head>
+<body class="relative min-h-screen royal-pattern select-none overflow-x-hidden">
+
+    <!-- CANVAS PARTÍCULAS DORADAS -->
+    <canvas id="bgCanvas" class="fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
+
+    <!-- RESPLANDORES AMBIENTALES -->
+    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[750px] h-[450px] bg-gold-400/10 rounded-full blur-[160px] pointer-events-none z-0"></div>
+    <div class="fixed bottom-0 right-1/4 w-[600px] h-[400px] bg-blue-800/20 rounded-full blur-[160px] pointer-events-none z-0"></div>
+
+    <!-- ==================================================== -->
+    <!-- PANTALLA DE APERTURA CINEMÁTICA (SOBRE DE GALA)      -->
+    <!-- ==================================================== -->
+    <div id="introScreen" class="fixed inset-0 z-50 flex items-center justify-center bg-royal-950 transition-all duration-1000 overflow-hidden px-4">
+        <canvas id="introCanvas" class="absolute inset-0 w-full h-full"></canvas>
+        <div class="absolute inset-0 bg-radial from-transparent via-royal-950/70 to-royal-950"></div>
+
+        <div class="relative z-10 max-w-2xl w-full text-center flex flex-col items-center p-8 sm:p-12 rounded-3xl border border-gold-400/30 bg-royal-900/70 backdrop-blur-xl shadow-2xl">
+            
+            <!-- Birrete Dorado Animado -->
+            <div id="introLogo" class="opacity-0 translate-y-6 transition-all duration-1000 mb-6 animate-float">
+                <div class="w-24 h-24 mx-auto rounded-full bg-gradient-to-b from-royal-800 to-royal-950 border-2 border-gold-400 flex items-center justify-center shadow-[0_0_40px_rgba(212,175,55,0.4)]">
+                    <i data-lucide="graduation-cap" class="w-12 h-12 text-gold-300"></i>
+                </div>
+            </div>
+
+            <span class="text-[11px] sm:text-xs font-cinzel font-bold tracking-[0.4em] text-gold-300 uppercase mb-2">
+                Colegio Honores • Nivel Primaria
+            </span>
+
+            <p class="font-cinzel text-sm sm:text-base tracking-[0.35em] text-gold-200/90 uppercase">
+                Promoción
+            </p>
+
+            <h1 class="font-decorative text-5xl sm:text-7xl font-black gold-foil-text tracking-wider my-2">
+                ELITE
+            </h1>
+
+            <div class="flex items-center justify-center gap-3 my-2">
+                <span class="text-gold-400 text-xs">★</span>
+                <span class="font-playfair italic text-2xl sm:text-3xl text-white font-semibold tracking-widest">2026</span>
+                <span class="text-gold-400 text-xs">★</span>
+            </div>
+
+            <div class="gold-ribbon px-8 py-2.5 my-5 max-w-md w-full">
+                <p class="font-montserrat font-bold text-xs sm:text-sm tracking-wide leading-snug">
+                    Equipo Líder e Inspirador<br>de Tiempos Exitosos
+                </p>
+            </div>
+
+            <button id="startExperienceBtn" class="mt-4 group relative inline-flex items-center justify-center px-10 py-4 font-cinzel font-extrabold rounded-full btn-gold cursor-pointer">
+                <span class="flex items-center gap-3 tracking-[0.2em] text-xs sm:text-sm uppercase">
+                    <i data-lucide="sparkles" class="w-5 h-5"></i>
+                    Abrir Invitación Oficial
+                </span>
+            </button>
+        </div>
+    </div>
+
+    <!-- CONTROL DE MÚSICA FLOTANTE -->
+    <button id="toggleAudioBtn" title="Activar/Silenciar Música de Gala" class="fixed bottom-6 right-6 z-40 p-3.5 rounded-full bg-royal-900/90 border border-gold-400/60 text-gold-300 shadow-[0_0_25px_rgba(212,175,55,0.3)] hover:scale-110 transition-all backdrop-blur-md">
+        <i id="audioIcon" data-lucide="volume-2" class="w-5 h-5"></i>
+    </button>
+
+    <!-- ==================================================== -->
+    <!-- INVITACIÓN PRINCIPAL DE ALTA GALA                    -->
+    <!-- ==================================================== -->
+    <main id="mainInvitation" class="relative z-10 min-h-screen opacity-0 pointer-events-none transition-opacity duration-1000 py-10 px-4 flex flex-col items-center justify-center">
+        
+        <article class="w-full max-w-3xl gala-card rounded-2xl p-4 sm:p-8 relative">
+            
+            <!-- Marco Ornamental Interior -->
+            <div class="ornate-border rounded-xl p-6 sm:p-12 relative">
+
+                <!-- 4 Esquinas Filigranadas SVG -->
+                <svg class="corner-ornament top-2 left-2" viewBox="0 0 40 40" fill="none"><path d="M2 38V12C2 6.477 6.477 2 12 2H38M2 22C13.046 22 22 13.046 22 2" stroke="currentColor" stroke-width="1.5"/></svg>
+                <svg class="corner-ornament top-2 right-2 rotate-90" viewBox="0 0 40 40" fill="none"><path d="M2 38V12C2 6.477 6.477 2 12 2H38M2 22C13.046 22 22 13.046 22 2" stroke="currentColor" stroke-width="1.5"/></svg>
+                <svg class="corner-ornament bottom-2 right-2 rotate-180" viewBox="0 0 40 40" fill="none"><path d="M2 38V12C2 6.477 6.477 2 12 2H38M2 22C13.046 22 22 13.046 22 2" stroke="currentColor" stroke-width="1.5"/></svg>
+                <svg class="corner-ornament bottom-2 left-2 -rotate-90" viewBox="0 0 40 40" fill="none"><path d="M2 38V12C2 6.477 6.477 2 12 2H38M2 22C13.046 22 22 13.046 22 2" stroke="currentColor" stroke-width="1.5"/></svg>
+
+                <!-- 1. ENCABEZADO INSTITUCIONAL -->
+                <header class="text-center mb-8">
+                    <div class="inline-flex items-center gap-3 px-5 py-1.5 rounded-full border border-gold-400/40 bg-royal-950/80 mb-4">
+                        <span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span>
+                        <span class="text-[11px] font-cinzel font-bold tracking-[0.35em] text-gold-200 uppercase">
+                            Colegio Honores • Nivel Primaria
+                        </span>
+                        <span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span>
+                    </div>
+
+                    <p class="text-xs uppercase tracking-[0.4em] text-gold-300/80 font-medium">
+                        Tiene el honor de invitarle a la
+                    </p>
+                    <h2 class="font-cursive text-4xl sm:text-5xl text-gold-100 mt-1">
+                        Gran Gala de Graduación
+                    </h2>
+                </header>
+
+                <!-- 2. EMBLEMA CENTRAL RECREACIÓN DE TU LOGO -->
+                <section class="text-center my-8 relative">
+                    <p class="font-cinzel text-sm sm:text-base font-bold tracking-[0.45em] text-gold-300 uppercase mb-1">
+                        PROMOCIÓN
+                    </p>
+
+                    <!-- Título ELITE con Birrete Dorado sobre la última E -->
+                    <div class="relative inline-block">
+                        <h1 class="font-cinzel text-6xl sm:text-8xl font-black gold-foil-text tracking-[0.12em] leading-none select-none">
+                            ELITE
+                        </h1>
+                        <!-- Birrete SVG posicionado sobre la E final -->
+                        <svg class="w-12 h-12 sm:w-16 sm:h-16 absolute -top-5 -right-5 sm:-top-7 sm:-right-7 text-gold-300 drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] transform rotate-12" viewBox="0 0 64 64" fill="none">
+                            <path d="M32 10L4 23L32 36L60 23L32 10Z" fill="url(#capGrad)" stroke="#fbf5d4" stroke-width="1"/>
+                            <path d="M14 28V41C14 41 21 47 32 47C43 47 50 41 50 41V28" fill="url(#capBase)" stroke="#fbf5d4" stroke-width="1"/>
+                            <path d="M55 25V43" stroke="#f3e5ab" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="55" cy="44" r="2.5" fill="#fbf5d4"/>
+                            <defs>
+                                <linearGradient id="capGrad" x1="4" y1="10" x2="60" y2="36" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#f3e5ab"/><stop offset="0.5" stop-color="#d4af37"/><stop offset="1" stop-color="#8a6d14"/>
+                                </linearGradient>
+                                <linearGradient id="capBase" x1="14" y1="28" x2="50" y2="47" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#d4af37"/><stop offset="1" stop-color="#6e560d"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+
+                    <!-- Año 2026 con Estrellas -->
+                    <div class="flex items-center justify-center gap-4 my-3">
+                        <div class="h-[1px] w-12 sm:w-20 bg-gradient-to-r from-transparent to-gold-400"></div>
+                        <span class="text-gold-400 text-sm">★</span>
+                        <span class="font-playfair italic text-3xl sm:text-4xl font-bold text-white tracking-[0.2em]">2026</span>
+                        <span class="text-gold-400 text-sm">★</span>
+                        <div class="h-[1px] w-12 sm:w-20 bg-gradient-to-l from-transparent to-gold-400"></div>
+                    </div>
+
+                    <!-- Listón Dorado Oficial -->
+                    <div class="max-w-md mx-auto mt-4">
+                        <div class="gold-ribbon py-2.5 px-8">
+                            <p class="font-montserrat font-extrabold text-xs sm:text-sm tracking-wide uppercase">
+                                Equipo Líder e Inspirador<br class="sm:hidden"> de Tiempos Exitosos
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. FRASE DE GALA -->
+                <div class="text-center max-w-lg mx-auto my-8">
+                    <p class="font-playfair italic text-lg sm:text-xl text-gold-100/90 leading-relaxed">
+                        "Culminamos una etapa llena de aprendizajes, amistad y sueños cumplidos, listos para brillar en cada nuevo horizonte."
+                    </p>
+                </div>
+
+                <!-- 4. CUENTA REGRESIVA ESTILO RELOJERÍA DE LUJO -->
+                <section class="luxury-panel rounded-2xl p-6 mb-8 text-center">
+                    <p class="text-[11px] font-cinzel font-bold uppercase tracking-[0.3em] text-gold-300 mb-4 flex items-center justify-center gap-2">
+                        <i data-lucide="hourglass" class="w-4 h-4 text-gold-400"></i>
+                        Cuenta Regresiva para la Gala
+                    </p>
+                    <div class="grid grid-cols-4 gap-2.5 sm:gap-4">
+                        <div class="bg-royal-950/90 border border-gold-400/35 rounded-xl py-3 px-2">
+                            <span id="cd-days" class="font-cinzel text-2xl sm:text-4xl font-black gold-foil-text block">00</span>
+                            <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-gold-200/70 font-semibold mt-1 block">Días</span>
+                        </div>
+                        <div class="bg-royal-950/90 border border-gold-400/35 rounded-xl py-3 px-2">
+                            <span id="cd-hours" class="font-cinzel text-2xl sm:text-4xl font-black gold-foil-text block">00</span>
+                            <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-gold-200/70 font-semibold mt-1 block">Horas</span>
+                        </div>
+                        <div class="bg-royal-950/90 border border-gold-400/35 rounded-xl py-3 px-2">
+                            <span id="cd-minutes" class="font-cinzel text-2xl sm:text-4xl font-black gold-foil-text block">00</span>
+                            <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-gold-200/70 font-semibold mt-1 block">Minutos</span>
+                        </div>
+                        <div class="bg-royal-950/90 border border-gold-400/35 rounded-xl py-3 px-2">
+                            <span id="cd-seconds" class="font-cinzel text-2xl sm:text-4xl font-black text-white block">00</span>
+                            <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-gold-300 font-semibold mt-1 block">Segundos</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5. FECHA Y RECEPCIÓN (2 COLUMNAS) -->
+                <section class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
+                    <!-- Tarjeta Fecha -->
+                    <div class="luxury-panel rounded-2xl p-6 text-center flex flex-col justify-center items-center">
+                        <div class="w-12 h-12 rounded-full bg-royal-950 border border-gold-400/50 flex items-center justify-center mb-3 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                            <i data-lucide="calendar-heart" class="w-6 h-6 text-gold-300"></i>
+                        </div>
+                        <span class="text-[10px] font-cinzel font-bold uppercase tracking-[0.25em] text-gold-300/80">
+                            Fecha de Ceremonia
+                        </span>
+                        <p class="font-playfair text-xl font-bold text-white mt-1">
+                            Viernes, 11 de Diciembre
+                        </p>
+                        <div class="mt-2 inline-block px-3 py-0.5 rounded-full bg-gold-400/15 border border-gold-400/30 text-xs font-cinzel font-semibold text-gold-200">
+                            2026 • 06:30 PM
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta Ubicación -->
+                    <div class="luxury-panel rounded-2xl p-6 text-center flex flex-col justify-between items-center">
+                        <div class="flex flex-col items-center">
+                            <div class="w-12 h-12 rounded-full bg-royal-950 border border-gold-400/50 flex items-center justify-center mb-3 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                                <i data-lucide="map-pin" class="w-6 h-6 text-gold-300"></i>
+                            </div>
+                            <span class="text-[10px] font-cinzel font-bold uppercase tracking-[0.25em] text-gold-300/80">
+                                Recepción & Gala
+                            </span>
+                            <p class="font-playfair text-xl font-bold text-white mt-1">
+                                Orquídea Dorada
+                            </p>
+                            <span class="text-xs text-gold-100/75 mt-1">
+                                Av. Chillón Trapiche 051, Comas[cite: 9]
+                            </span>
+                        </div>
+
+                        <a href="https://www.google.com/maps/search/?api=1&query=Orquidia+Dorada+Av.+Chill%C3%B3n+Trapiche+051+Comas" target="_blank" rel="noopener noreferrer" class="mt-4 w-full py-2.5 px-4 rounded-xl btn-gold font-cinzel font-bold text-xs uppercase tracking-[0.15em] inline-flex items-center justify-center gap-2">
+                            <i data-lucide="navigation" class="w-3.5 h-3.5"></i>
+                            Ver Ubicación en Mapa
+                        </a>
+                    </div>
+                </section>
+
+                <!-- 6. PROGRAMA DE GALA (LÍNEA DE TIEMPO VERTICAL) -->
+                <section class="luxury-panel rounded-2xl p-6 sm:p-8 mb-8">
+                    <div class="text-center mb-6">
+                        <span class="text-[10px] font-cinzel uppercase tracking-[0.3em] text-gold-300/80 block">Itinerario Oficial</span>
+                        <h3 class="font-cinzel text-lg font-bold text-gold-200 uppercase tracking-widest mt-1">
+                            Programa de la Noche
+                        </h3>
+                    </div>
+
+                    <div class="relative max-w-md mx-auto pl-6 border-l border-gold-400/40 space-y-6">
+                        <!-- Hito 1 -->
+                        <div class="relative">
+                            <span class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-gold-400 ring-4 ring-royal-900"></span>
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                                <div>
+                                    <h4 class="font-cinzel font-bold text-sm text-white">Alfombra Roja y Recepción</h4>
+                                    <p class="text-xs text-gold-100/70">Bienvenida oficial de graduados y familias</p>
+                                </div>
+                                <span class="font-cinzel font-bold text-xs text-gold-300 bg-royal-950/90 px-3 py-1 rounded border border-gold-400/30 self-start">
+                                    06:30 PM
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Hito 2 -->
+                        <div class="relative">
+                            <span class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-gold-300 ring-4 ring-royal-900"></span>
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                                <div>
+                                    <h4 class="font-cinzel font-bold text-sm text-white">Sesión Fotográfica Oficial</h4>
+                                    <p class="text-xs text-gold-100/70">Retratos individuales y grupales de promoción</p>
+                                </div>
+                                <span class="font-cinzel font-bold text-xs text-gold-300 bg-royal-950/90 px-3 py-1 rounded border border-gold-400/30 self-start">
+                                    07:00 PM - 08:00 PM
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Hito 3 -->
+                        <div class="relative">
+                            <span class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-gold-400 ring-4 ring-royal-900 shadow-[0_0_10px_#d4af37]"></span>
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                                <div>
+                                    <h4 class="font-cinzel font-bold text-sm text-gold-200">Ceremonia Central & Brindis</h4>
+                                    <p class="text-xs text-gold-100/70">Ingreso de honor, palabras y vals de gala</p>
+                                </div>
+                                <span class="font-cinzel font-bold text-xs text-royal-950 bg-gold-300 px-3 py-1 rounded font-extrabold self-start">
+                                    08:00 PM
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 7. PROTOCOLO & PUNTUALIDAD -->
+                <section class="rounded-2xl p-5 bg-royal-950/80 border border-gold-400/35 text-center mb-6">
+                    <div class="flex items-center justify-center gap-2 text-gold-300 mb-1.5">
+                        <i data-lucide="crown" class="w-4 h-4"></i>
+                        <span class="font-cinzel font-bold text-xs uppercase tracking-[0.25em]">Etiqueta & Puntualidad</span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gold-100/85 leading-relaxed">
+                        Vestimenta: <strong class="text-gold-300">Gala Formal</strong>. Se agradece su amable <strong class="text-white">puntualidad</strong> para dar inicio oportuno a la sesión fotográfica y ceremonia de honor.
+                    </p>
+                </section>
+
+                <!-- PIE DE INVITACIÓN -->
+                <footer class="text-center pt-4 border-t border-gold-400/20">
+                    <p class="font-cinzel text-xs font-bold tracking-[0.35em] text-gold-300 uppercase">
+                        Colegio Honores • Primaria 2026
+                    </p>
+                    <p class="font-playfair italic text-xs text-gold-200/70 mt-1">
+                        Promoción ELITE — Equipo Líder e Inspirador de Tiempos Exitosos
+                    </p>
+                </footer>
+
+            </div>
+        </article>
+    </main>
+
+    <!-- SCRIPTS INTERACTIVOS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.lucide) lucide.createIcons();
+            setTimeout(() => {
+                const logo = document.getElementById('introLogo');
+                if (logo) logo.classList.remove('opacity-0', 'translate-y-6');
+            }, 250);
+        });
+
+        const introScreen = document.getElementById('introScreen');
+        const mainInvitation = document.getElementById('mainInvitation');
+        const startBtn = document.getElementById('startExperienceBtn');
+
+        startBtn.addEventListener('click', () => {
+            initAudioSynthesizer();
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 110,
+                    spread: 85,
+                    origin: { y: 0.6 },
+                    colors: ['#d4af37', '#fbf5d4', '#b59428', '#ffffff']
+                });
+            }
+            introScreen.classList.add('opacity-0', 'scale-105');
+            setTimeout(() => {
+                introScreen.classList.add('hidden');
+                mainInvitation.classList.remove('pointer-events-none', 'opacity-0');
+            }, 900);
+        });
+
+        // CANVAS DE PARTÍCULAS DORADAS FLOTANTES
+        const bgCanvas = document.getElementById('bgCanvas');
+        const bgCtx = bgCanvas.getContext('2d');
+
+        function resizeCanvas() {
+            bgCanvas.width = window.innerWidth;
+            bgCanvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class GoldDust {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * bgCanvas.width;
+                this.y = Math.random() * bgCanvas.height;
+                this.size = Math.random() * 2.2 + 0.4;
+                this.speedY = Math.random() * -0.45 - 0.1;
+                this.speedX = (Math.random() - 0.5) * 0.25;
+                this.alpha = Math.random() * 0.75 + 0.15;
+                this.twinkle = Math.random() * 0.03 + 0.01;
+            }
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX;
+                if (this.y < -10) {
+                    this.reset();
+                    this.y = bgCanvas.height + 10;
+                }
+            }
+            draw() {
+                const currentAlpha = this.alpha * (0.6 + 0.4 * Math.sin(Date.now() * this.twinkle));
+                bgCtx.beginPath();
+                bgCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                bgCtx.fillStyle = `rgba(212, 175, 55, ${currentAlpha})`;
+                bgCtx.shadowBlur = 8;
+                bgCtx.shadowColor = '#f3e5ab';
+                bgCtx.fill();
+                bgCtx.shadowBlur = 0;
+            }
+        }
+
+        const particles = Array.from({ length: 85 }, () => new GoldDust());
+
+        function animateParticles() {
+            bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // SINTETIZADOR DE VALS CEREMONIAL (WEB AUDIO API)
+        let audioCtx = null;
+        let isPlayingAudio = false;
+        let musicalInterval = null;
+
+        function initAudioSynthesizer() {
+            if (!audioCtx) {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                audioCtx = new AudioContext();
+            }
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            if (musicalInterval) return;
+
+            const chords = [
+                { bass: 146.83, melody: [293.66, 369.99, 440.00, 587.33] },
+                { bass: 185.00, melody: [369.99, 440.00, 554.37, 739.99] },
+                { bass: 196.00, melody: [392.00, 493.88, 587.33, 783.99] },
+                { bass: 220.00, melody: [440.00, 554.37, 659.25, 880.00] }
+            ];
+
+            let step = 0;
+            function playBeat() {
+                if (!audioCtx || audioCtx.state !== 'running' || !isPlayingAudio) return;
+                const chord = chords[Math.floor(step / 3) % chords.length];
+                const beat = step % 3;
+                const now = audioCtx.currentTime;
+
+                if (beat === 0) {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(chord.bass, now);
+                    gain.gain.setValueAtTime(0.001, now);
+                    gain.gain.exponentialRampToValueAtTime(0.09, now + 0.05);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.9);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.95);
+                } else {
+                    chord.melody.forEach((freq, idx) => {
+                        const osc = audioCtx.createOscillator();
+                        const gain = audioCtx.createGain();
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(freq, now);
+                        gain.gain.setValueAtTime(0.001, now);
+                        gain.gain.exponentialRampToValueAtTime(0.025 / (idx + 1), now + 0.03);
+                        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.6);
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+                        osc.start(now);
+                        osc.stop(now + 0.65);
+                    });
+                }
+                step++;
+            }
+
+            isPlayingAudio = true;
+            musicalInterval = setInterval(playBeat, 480);
+            updateAudioIcon();
+        }
+
+        document.getElementById('toggleAudioBtn').addEventListener('click', () => {
+            if (!audioCtx) { initAudioSynthesizer(); return; }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+                isPlayingAudio = true;
+            } else if (isPlayingAudio) {
+                audioCtx.suspend();
+                isPlayingAudio = false;
+            } else {
+                audioCtx.resume();
+                isPlayingAudio = true;
+            }
+            updateAudioIcon();
+        });
+
+        function updateAudioIcon() {
+            const icon = document.getElementById('audioIcon');
+            if (icon) {
+                icon.setAttribute('data-lucide', isPlayingAudio ? 'volume-2' : 'volume-x');
+                if (window.lucide) lucide.createIcons();
+            }
+        }
+
+        // CUENTA REGRESIVA: VIERNES 11 DE DICIEMBRE DE 2026 - 06:30 PM[cite: 9]
+        const targetDate = new Date("2026-12-11T18:30:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+
+            if (diff <= 0) return;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('cd-days').innerText = days.toString().padStart(2, '0');
+            document.getElementById('cd-hours').innerText = hours.toString().padStart(2, '0');
+            document.getElementById('cd-minutes').innerText = minutes.toString().padStart(2, '0');
+            document.getElementById('cd-seconds').innerText = seconds.toString().padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
